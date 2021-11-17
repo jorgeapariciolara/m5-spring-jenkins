@@ -7,17 +7,17 @@ pipeline {
     stages {
         stage("Env Variables") {
             steps {
-                sh "printenv"
+                bat "printenv"
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                bat 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -28,12 +28,12 @@ pipeline {
         }
         stage('Site') {
             steps {
-                sh 'mvn site'
+                bat 'mvn site'
             }
         }
         stage('Sonar'){
             steps {
-                 sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=m5-spring-jenkins -Dsonar.login=c5f73456fdc62705650e6c57648ffa62ca6f5737 -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=jorgeaparicio'
+                 bat 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=m5-spring-jenkins -Dsonar.login=c5f73456fdc62705650e6c57648ffa62ca6f5737 -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=jorgeaparicio'
             }
         }
     }
