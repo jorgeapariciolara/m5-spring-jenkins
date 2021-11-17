@@ -1,10 +1,15 @@
 pipeline {
     agent any
     tools {
-        maven "Maven"
-        jdk "jdk-17"
+        maven "maven3.8.3"
+        jdk "jdk17-nuevo"
     }
     stages {
+        stage("Env Variables") {
+            steps {
+                sh "printenv"
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
